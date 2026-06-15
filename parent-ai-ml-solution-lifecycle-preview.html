@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI/ML Solution Lifecycle — Preview</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", sans-serif; font-size: 14px; line-height: 1.55; color: #172B4D; background: #F4F5F7; -webkit-font-smoothing: antialiased; }
+  .preview-banner { background: #172B4D; color: #FFFFFF; padding: 10px 24px; font-size: 12px; text-align: center; }
+  .top-bar { background: #FFFFFF; border-bottom: 1px solid #DFE1E6; padding: 12px 24px; display: flex; align-items: center; gap: 8px; font-size: 13px; color: #6B778C; }
+  .top-bar a { color: #0052CC; text-decoration: none; }
+  .top-bar .sep { color: #B3BAC5; }
+  .page-wrapper { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 240px 1fr; gap: 24px; padding: 24px; }
+  .sidebar { background: #FFFFFF; border: 1px solid #DFE1E6; border-radius: 3px; padding: 16px; height: fit-content; position: sticky; top: 24px; }
+  .sidebar h4 { font-size: 11px; font-weight: 600; color: #6B778C; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid #F4F5F7; }
+  .sidebar ul { list-style: none; }
+  .sidebar li { font-size: 13px; padding: 6px 8px; border-radius: 3px; cursor: pointer; color: #42526E; }
+  .sidebar li.parent { font-weight: 600; color: #172B4D; background:#E6EFFC; }
+  .sidebar li.indent { padding-left: 20px; position: relative; }
+  .sidebar li.indent::before { content: ''; position: absolute; left: 8px; top: 0; bottom: 0; width: 1px; background: #DFE1E6; }
+  .content-card { background: #FFFFFF; border: 1px solid #DFE1E6; border-radius: 3px; padding: 40px 56px; }
+  .content h1 { font-size: 28px; font-weight: 500; color: #172B4D; margin-bottom: 4px; }
+  .content .meta { font-size: 12px; color: #6B778C; margin-bottom: 24px; }
+  .content h2 { font-size: 20px; font-weight: 500; color: #172B4D; margin: 36px 0 12px; }
+  .content p { margin-bottom: 12px; }
+  .content ul, .content ol { margin: 0 0 12px 24px; }
+  .content li { margin-bottom: 6px; }
+  .content em { color: #42526E; }
+  .content strong { color: #172B4D; }
+  .panel { margin: 16px 0; padding: 12px 16px 12px 40px; border-radius: 3px; position: relative; font-size: 14px; }
+  .panel::before { position: absolute; left: 12px; top: 14px; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #FFFFFF; font-weight: 700; font-size: 11px; }
+  .panel-policy { background: #FFFAE6; border-left: 3px solid #FF8B00; }
+  .panel-policy::before { background: #FF8B00; content: '!'; }
+  .hero { max-width: 720px; margin: 12px auto 28px; text-align:center; }
+  .hero svg { display:block; width:100%; height:auto; margin:0 auto; }
+  .content a { color: #0052CC; text-decoration: none; }
+  .footer-meta { margin-top: 48px; padding-top: 16px; border-top: 1px solid #F4F5F7; font-size: 12px; color: #6B778C; font-style: italic; }
+  svg .th { font: 500 14px -apple-system, "Segoe UI", sans-serif; }
+  svg .t  { font: 400 14px -apple-system, "Segoe UI", sans-serif; }
+  svg .ts { font: 400 12px -apple-system, "Segoe UI", sans-serif; }
+</style>
+</head>
+<body>
+<div class="preview-banner"><strong>Preview</strong> &mdash; a local approximation of how the parent page will look once published in Confluence. Styling is illustrative, not pixel-perfect.</div>
+<div class="top-bar"><a href="#">Spaces</a><span class="sep">/</span><a href="#">MLOps</a><span class="sep">/</span><span>AI/ML Solution Lifecycle</span></div>
+<div class="page-wrapper">
+  <aside class="sidebar">
+    <h4>In this space</h4>
+    <ul>
+      <li class="parent">AI/ML Solution Lifecycle</li>
+      <li class="indent">Intake / AI Front Door</li>
+      <li class="indent">The Lifecycle in Detail</li>
+      <li class="indent">Roles, Accountabilities &amp; Gates</li>
+      <li class="indent">Risk, Compliance &amp; Responsible AI</li>
+      <li class="indent">Platform, Tooling &amp; Standards</li>
+      <li class="indent">Metrics, Reporting &amp; Improvement</li>
+    </ul>
+  </aside>
+  <main class="content-card">
+    <article class="content">
+      <h1>AI/ML Solution Lifecycle</h1>
+      <div class="meta">Review cadence: quarterly</div>
+
+      <div class="panel panel-policy"><strong>Policy.</strong> The lifecycle described on this page applies to all AI/ML solutions at [Organisation]. Variations require explicit sign-off from [appropriate authority &mdash; to confirm].</div>
+
+      <h2>Purpose</h2>
+      <p>This page describes how AI/ML solutions move from idea to retirement at [Organisation]. It is the canonical reference for anyone delivering, governing, or supporting AI/ML work &mdash; from initial use case through to decommissioning. This parent page gives the whole lifecycle in about five minutes; the child pages provide the depth needed to operate within it.</p>
+      <p>It establishes a shared lifecycle, a common vocabulary, and a clear view of who is accountable at each stage. It does not replace existing policies on data, security, change management, or risk — it sits alongside them and shows where they apply within the lifecycle.</p>
+
+      <h2>What counts as an AI/ML solution</h2>
+      <p><strong>In scope.</strong> Any in-house system that uses machine learning, deep learning, or generative AI to inform or automate decisions, generate content, or produce predictions used by people or downstream systems. This covers solutions built from scratch and those materially configured by the team, regardless of model class.</p>
+      <p><strong>Out of scope.</strong> One-off exploratory notebooks and ad-hoc analyses that do not ship. Off-the-shelf SaaS features used without modification or material configuration. Procured or embedded third-party AI products are also out of scope at this stage; they will be brought into the lifecycle as the function matures.</p>
+      <p>The distinction between a <em>model</em> and a <em>solution</em> matters: a solution is a model <em>plus</em> its data pipeline, interfaces, monitoring, and accountable owner. This lifecycle governs solutions, not models in isolation.</p>
+
+      <h2>Guiding principles</h2>
+      <p>A small number of principles sit underneath the whole lifecycle. They are the reasons the gates and artefacts in the child pages exist, and they are the tie-breakers when this documentation does not have a specific answer.</p>
+      <ol>
+        <li><strong>Outcome before sophistication.</strong> No solution proceeds without a clearly stated, measurable business outcome, and the simplest approach that meets it is preferred. Sophistication is earned by the problem, not assumed.</li>
+        <li><strong>Clear accountability at every stage.</strong> Each solution has one accountable team at each point in its life &mdash; Data Science through delivery, MLOps in operation &mdash; so it is always unambiguous who carries a given decision.</li>
+        <li><strong>Proportional, reversible delivery.</strong> The depth of governance scales with the impact of the solution, and solutions are built so they can be rolled back to a known-good state. Low-risk work moves quickly; high-stakes work is held to more.</li>
+      </ol>
+
+      <h2>The lifecycle at a glance</h2>
+      <p>The lifecycle has six phases, from Intake through to Retirement. The first five carry a solution from idea to steady-state operation; Retirement is the terminal phase. A single feedback loop runs from Monitor back to Discovery: when a live solution needs a <em>material</em> change, it re-enters the lifecycle rather than being altered in place.</p>
+
+      <div class="hero"><svg width="100%" viewBox="0 0 680 366" role="img" xmlns="http://www.w3.org/2000/svg">
+<title>AI/ML Solution Lifecycle road</title>
+<defs>
+<marker id="bp" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#3A3A38" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></marker>
+</defs>
+<rect x="0" y="0" width="680" height="366" rx="12" fill="#EEEEEC"/>
+<path d="M504 206 C 478 160, 322 160, 296 200" fill="none" stroke="#3A3A38" stroke-width="10" stroke-linecap="round"/>
+<path d="M504 206 C 478 160, 322 160, 296 200" fill="none" stroke="#E8E8E4" stroke-width="1" stroke-linecap="butt" stroke-dasharray="1 7" marker-end="url(#bp)"/>
+<path d="M40 247 C 72 247, 60 244, 96 244 C 148 244, 148 226, 200 226 C 252 226, 252 214, 304 214 C 356 214, 356 214, 408 214 C 460 214, 460 226, 512 226 C 564 226, 568 244, 616 244" fill="none" stroke="#2E2E2C" stroke-width="40" stroke-linecap="round"/>
+<path d="M40 247 C 72 247, 60 244, 96 244 C 148 244, 148 226, 200 226 C 252 226, 252 214, 304 214 C 356 214, 356 214, 408 214 C 460 214, 460 226, 512 226 C 564 226, 568 244, 616 244" fill="none" stroke="#F4F4F1" stroke-width="2.2" stroke-linecap="butt" stroke-dasharray="14 18"/>
+<rect x="342" y="120" width="120" height="20" rx="6" fill="#FFFFFF" stroke="#CECBF6" stroke-width="0.75"/>
+<text class="ts" x="402" y="130" text-anchor="middle" dominant-baseline="central" style="fill:#534AB7">Material change</text>
+<text class="ts" x="402" y="150" text-anchor="middle" dominant-baseline="central" style="fill:#7F77DD">returns to Discovery</text>
+<g><line x1="148" y1="221" x2="148" y2="200" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round"/><rect x="143.5" y="183" width="9" height="18" rx="2.5" fill="#2E2E2C"/><circle cx="148" cy="187.5" r="1.8" fill="#D9534F"/><circle cx="148" cy="192" r="1.8" fill="#E0A33E"/><circle cx="148" cy="196.5" r="1.8" fill="#4CA777"/></g>
+<g><line x1="252" y1="207" x2="252" y2="186" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round"/><rect x="247.5" y="169" width="9" height="18" rx="2.5" fill="#2E2E2C"/><circle cx="252" cy="173.5" r="1.8" fill="#D9534F"/><circle cx="252" cy="178" r="1.8" fill="#E0A33E"/><circle cx="252" cy="182.5" r="1.8" fill="#4CA777"/></g>
+<g><line x1="460" y1="207" x2="460" y2="186" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round"/><rect x="455.5" y="169" width="9" height="18" rx="2.5" fill="#2E2E2C"/><circle cx="460" cy="173.5" r="1.8" fill="#D9534F"/><circle cx="460" cy="178" r="1.8" fill="#E0A33E"/><circle cx="460" cy="182.5" r="1.8" fill="#4CA777"/></g>
+<g><circle cx="96" cy="244" r="15" fill="#3C3489" stroke="#FFFFFF" stroke-width="2.4"/>
+<path d="M96 239 V244" stroke="#FFFFFF" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+<path d="M93.5 241.8 L96 244 L98.5 241.8" stroke="#FFFFFF" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M91 246.5 V249.5 H101 V246.5" stroke="#FFFFFF" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="109" cy="231" r="7.5" fill="#FFFFFF" stroke="#3C3489" stroke-width="1.2"/><text class="ts" x="109" y="231" text-anchor="middle" dominant-baseline="central" style="fill:#3C3489">1</text></g>
+<g><circle cx="200" cy="226" r="15" fill="#3C3489" stroke="#FFFFFF" stroke-width="2.4"/>
+<circle cx="198.8" cy="224.8" r="3.6" fill="none" stroke="#FFFFFF" stroke-width="1.5"/>
+<path d="M201.6 227.6 L205 231" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round"/>
+<circle cx="213" cy="213" r="7.5" fill="#FFFFFF" stroke="#3C3489" stroke-width="1.2"/><text class="ts" x="213" y="213" text-anchor="middle" dominant-baseline="central" style="fill:#3C3489">2</text></g>
+<g><circle cx="304" cy="214" r="15" fill="#3C3489" stroke="#FFFFFF" stroke-width="2.4"/>
+<path d="M301.6 209 V213 L298.8 218.5 Q298 220 300.4 220 H307.6 Q310 220 309.2 218.5 L306.4 213 V209" fill="none" stroke="#FFFFFF" stroke-width="1.4" stroke-linejoin="round"/>
+<path d="M300.4 209 H307.6" stroke="#FFFFFF" stroke-width="1.4" stroke-linecap="round"/>
+<circle cx="317" cy="201" r="7.5" fill="#FFFFFF" stroke="#3C3489" stroke-width="1.2"/><text class="ts" x="317" y="201" text-anchor="middle" dominant-baseline="central" style="fill:#3C3489">3</text></g>
+<g><circle cx="408" cy="214" r="15" fill="#3C3489" stroke="#FFFFFF" stroke-width="2.4"/>
+<path d="M404 208 V221" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round"/>
+<path d="M404 208 H414 V214 H404" fill="none" stroke="#FFFFFF" stroke-width="1.3" stroke-linejoin="round"/>
+<path d="M404 208 H409 V211 H404 Z M409 211 H414 V214 H409 Z" fill="#FFFFFF"/>
+<circle cx="421" cy="201" r="7.5" fill="#FFFFFF" stroke="#3C3489" stroke-width="1.2"/><text class="ts" x="421" y="201" text-anchor="middle" dominant-baseline="central" style="fill:#3C3489">4</text></g>
+<g><circle cx="512" cy="226" r="15" fill="#3C3489" stroke="#FFFFFF" stroke-width="2.4"/>
+<path d="M505 226 H509.5 L511.3 221 L514 231 L515.8 226 H519" fill="none" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="525" cy="213" r="7.5" fill="#FFFFFF" stroke="#3C3489" stroke-width="1.2"/><text class="ts" x="525" y="213" text-anchor="middle" dominant-baseline="central" style="fill:#3C3489">5</text></g>
+<g><circle cx="616" cy="244" r="15" fill="#5F5E5A" stroke="#FFFFFF" stroke-width="2.4"/>
+<path d="M616 238 V244" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round"/>
+<path d="M611.4 241 A 6 6 0 1 0 620.6 241" fill="none" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round"/>
+<circle cx="629" cy="231" r="7.5" fill="#FFFFFF" stroke="#5F5E5A" stroke-width="1.2"/><text class="ts" x="629" y="231" text-anchor="middle" dominant-baseline="central" style="fill:#5F5E5A">6</text></g>
+<text class="th" x="96" y="286" text-anchor="middle" dominant-baseline="central" style="fill:#26215C">Intake</text>
+<text class="ts" x="96" y="302" text-anchor="middle" dominant-baseline="central" style="fill:#6E6C86">Front door</text>
+<text class="th" x="200" y="268" text-anchor="middle" dominant-baseline="central" style="fill:#26215C">Feasibility</text>
+<text class="ts" x="200" y="284" text-anchor="middle" dominant-baseline="central" style="fill:#6E6C86">Go / no-go</text>
+<text class="th" x="304" y="256" text-anchor="middle" dominant-baseline="central" style="fill:#26215C">Discovery</text>
+<text class="ts" x="304" y="272" text-anchor="middle" dominant-baseline="central" style="fill:#6E6C86">POC &amp; pilot</text>
+<text class="th" x="408" y="256" text-anchor="middle" dominant-baseline="central" style="fill:#26215C">Productionise</text>
+<text class="ts" x="408" y="272" text-anchor="middle" dominant-baseline="central" style="fill:#6E6C86">Build &amp; deploy</text>
+<text class="th" x="512" y="268" text-anchor="middle" dominant-baseline="central" style="fill:#26215C">Monitor</text>
+<text class="ts" x="512" y="284" text-anchor="middle" dominant-baseline="central" style="fill:#6E6C86">Steady state</text>
+<text class="th" x="616" y="286" text-anchor="middle" dominant-baseline="central" style="fill:#26215C">Retirement</text>
+<text class="ts" x="616" y="302" text-anchor="middle" dominant-baseline="central" style="fill:#6E6C86">Decommission</text>
+<line x1="40" y1="330" x2="640" y2="330" stroke="#DAD9D5" stroke-width="1"/>
+<g><line x1="118" y1="352" x2="118" y2="343" stroke="#9A9A95" stroke-width="2" stroke-linecap="round"/><rect x="114" y="341" width="8" height="13" rx="2" fill="#2E2E2C"/><circle cx="118" cy="344.5" r="1.5" fill="#D9534F"/><circle cx="118" cy="347.5" r="1.5" fill="#E0A33E"/><circle cx="118" cy="350.5" r="1.5" fill="#4CA777"/></g>
+<text class="ts" x="132" y="347" dominant-baseline="central" style="fill:#6E6C86">Traffic light = governance gate</text>
+<path d="M372 347 C 384 340, 404 340, 416 347" fill="none" stroke="#3A3A38" stroke-width="2.6" stroke-linecap="round"/>
+<text class="ts" x="428" y="347" dominant-baseline="central" style="fill:#6E6C86">Bypass = material change route</text>
+</svg></div>
+
+      <p>Phase ownership sits at department level: Data Science (DS) accountable for Intake through Productionise up to the handover gate, and MLOps accountable from that handover through Monitor and Retirement. Feasibility, though DS-led, is a cross-team check involving Data Solution, Data Engineering, MLOps, and AI Governance, with Platform collaborating on resources and environments. The detail of each phase is on <a href="#">The Lifecycle in Detail</a>.</p>
+
+      <h2>In this space</h2>
+      <ul>
+        <li><a href="#">The Lifecycle in Detail</a> &mdash; the six phases in depth: objectives, activities, artefacts, gate questions, and the Material Change Rubric.</li>
+        <li><a href="#">Roles, Accountabilities, and Governance Gates</a> &mdash; the full RACI and the explicit criteria behind each gate.</li>
+        <li><a href="#">Risk, Compliance, and Responsible AI</a> &mdash; how risk tiering and responsible-AI obligations apply across the lifecycle.</li>
+        <li><a href="#">Platform, Tooling, and Standards</a> &mdash; the platforms, tools, and engineering standards that support delivery.</li>
+        <li><a href="#">Metrics, Reporting, and Continuous Improvement</a> &mdash; how the function measures itself and improves over time.</li>
+        <li><a href="#">Intake / AI Front Door</a> &mdash; how use cases are submitted and triaged (owned by the DS community).</li>
+      </ul>
+      <div class="footer-meta">Review cadence: quarterly.</div>
+    </article>
+  </main>
+</div>
+</body>
+</html>

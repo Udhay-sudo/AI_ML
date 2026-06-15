@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Lifecycle in Detail — Preview</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", sans-serif; font-size: 14px; line-height: 1.55; color: #172B4D; background: #F4F5F7; -webkit-font-smoothing: antialiased; }
+  .preview-banner { background: #172B4D; color: #FFFFFF; padding: 10px 24px; font-size: 12px; text-align: center; letter-spacing: 0.02em; }
+  .top-bar { background: #FFFFFF; border-bottom: 1px solid #DFE1E6; padding: 12px 24px; display: flex; align-items: center; gap: 8px; font-size: 13px; color: #6B778C; }
+  .top-bar a { color: #0052CC; text-decoration: none; }
+  .top-bar .sep { color: #B3BAC5; }
+  .page-wrapper { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 240px 1fr; gap: 24px; padding: 24px; }
+  .sidebar { background: #FFFFFF; border: 1px solid #DFE1E6; border-radius: 3px; padding: 16px; height: fit-content; position: sticky; top: 24px; }
+  .sidebar h4 { font-size: 11px; font-weight: 600; color: #6B778C; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid #F4F5F7; }
+  .sidebar ul { list-style: none; }
+  .sidebar li { font-size: 13px; padding: 6px 8px; border-radius: 3px; cursor: pointer; color: #42526E; }
+  .sidebar li:hover { background: #F4F5F7; }
+  .sidebar li.parent { font-weight: 600; color: #172B4D; }
+  .sidebar li.indent { padding-left: 20px; position: relative; }
+  .sidebar li.indent::before { content: ''; position: absolute; left: 8px; top: 0; bottom: 0; width: 1px; background: #DFE1E6; }
+  .sidebar li.current { background: #E6EFFC; color: #0052CC; font-weight: 600; }
+  .content-card { background: #FFFFFF; border: 1px solid #DFE1E6; border-radius: 3px; padding: 40px 56px; }
+  .content h1 { font-size: 28px; font-weight: 500; color: #172B4D; margin-bottom: 4px; letter-spacing: -0.01em; }
+  .content .meta { font-size: 12px; color: #6B778C; margin-bottom: 24px; }
+  .content h2 { font-size: 20px; font-weight: 500; color: #172B4D; margin: 36px 0 12px; letter-spacing: -0.01em; }
+  .content p { margin-bottom: 12px; }
+  .content ul, .content ol { margin: 0 0 12px 24px; }
+  .content li { margin-bottom: 6px; }
+  .content em { color: #42526E; }
+  .content strong { color: #172B4D; }
+  .content hr { border: none; border-top: 1px solid #F4F5F7; margin: 32px 0; }
+  .panel { margin: 16px 0; padding: 12px 16px 12px 40px; border-radius: 3px; position: relative; font-size: 14px; }
+  .panel::before { position: absolute; left: 12px; top: 14px; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #FFFFFF; font-weight: 700; font-size: 11px; }
+  .panel-policy { background: #FFFAE6; border-left: 3px solid #FF8B00; }
+  .panel-policy::before { background: #FF8B00; content: '!'; }
+  .panel-guidance { background: #E6EFFC; border-left: 3px solid #0052CC; }
+  .panel-guidance::before { background: #0052CC; content: 'i'; font-style: italic; }
+  .panel-aspiration { background: #DEEBFF; border-left: 3px solid #4C9AFF; }
+  .panel-aspiration::before { background: #4C9AFF; content: '\2605'; font-size: 11px; }
+  .hero, .phase-figure { max-width: 720px; margin: 18px auto 24px; text-align: center; }
+  .hero svg, .phase-figure svg { display: block; width: 100%; height: auto; margin: 0 auto; }
+  .content a { color: #0052CC; text-decoration: none; }
+  .content a:hover { text-decoration: underline; }
+  .footer-meta { margin-top: 48px; padding-top: 16px; border-top: 1px solid #F4F5F7; font-size: 12px; color: #6B778C; font-style: italic; }
+  svg .th { font: 500 14px -apple-system, "Segoe UI", sans-serif; }
+  svg .t  { font: 400 14px -apple-system, "Segoe UI", sans-serif; }
+  svg .ts { font: 400 12px -apple-system, "Segoe UI", sans-serif; }
+  svg .c-purple rect { fill: #EEEDFE; stroke: #534AB7; }
+  svg .c-purple text { fill: #3C3489; }
+</style>
+</head>
+<body>
+<div class="preview-banner"><strong>Preview</strong> &mdash; a local approximation of how the page will look once published in Confluence. Styling is illustrative, not pixel-perfect.</div>
+<div class="top-bar"><a href="#">Spaces</a><span class="sep">/</span><a href="#">MLOps</a><span class="sep">/</span><a href="#">AI/ML Solution Lifecycle</a><span class="sep">/</span><span>The Lifecycle in Detail</span></div>
+<div class="page-wrapper">
+  <aside class="sidebar">
+    <h4>In this space</h4>
+    <ul>
+      <li class="parent">AI/ML Solution Lifecycle</li>
+      <li class="indent">Intake / AI Front Door</li>
+      <li class="indent current">The Lifecycle in Detail</li>
+      <li class="indent">Roles, Accountabilities &amp; Gates</li>
+      <li class="indent">Risk, Compliance &amp; Responsible AI</li>
+      <li class="indent">Platform, Tooling &amp; Standards</li>
+      <li class="indent">Metrics, Reporting &amp; Improvement</li>
+    </ul>
+  </aside>
+  <main class="content-card">
+    <article class="content">
+      <h1>The Lifecycle in Detail</h1>
+      <div class="meta">Review cadence: quarterly</div>
+
+      <div class="panel panel-policy"><strong>Policy.</strong> Every AI/ML solution at [Organisation] moves through the six phases described on this page. The artefacts and gate questions noted in each section establish current expectations. As the AI/ML function matures, expectations will tighten and selected artefacts will become mandatory.</div>
+
+      <h2>Purpose</h2>
+      <p>This page is the working reference for the six lifecycle phases introduced on the <a href="#">AI/ML Solution Lifecycle</a> parent page. For each phase it sets out the objective, the key activities, the artefacts produced, the department accountable, and the gate question that governs the move to the next phase. The full RACI and the explicit criteria behind each gate live on the <a href="#">Roles, Accountabilities, and Governance Gates</a> child page.</p>
+      <p>None of the artefacts described below are mandatory today; that will change as the function matures, with the model card and the Change Classification Record the most likely to harden first.</p>
+
+      <div class="hero"><svg width="100%" viewBox="0 0 680 366" role="img" xmlns="http://www.w3.org/2000/svg">
+<title>AI/ML Solution Lifecycle road</title>
+<defs>
+<marker id="bp" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#3A3A38" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></marker>
+</defs>
+<rect x="0" y="0" width="680" height="366" rx="12" fill="#EEEEEC"/>
+<path d="M504 206 C 478 160, 322 160, 296 200" fill="none" stroke="#3A3A38" stroke-width="10" stroke-linecap="round"/>
+<path d="M504 206 C 478 160, 322 160, 296 200" fill="none" stroke="#E8E8E4" stroke-width="1" stroke-linecap="butt" stroke-dasharray="1 7" marker-end="url(#bp)"/>
+<path d="M40 247 C 72 247, 60 244, 96 244 C 148 244, 148 226, 200 226 C 252 226, 252 214, 304 214 C 356 214, 356 214, 408 214 C 460 214, 460 226, 512 226 C 564 226, 568 244, 616 244" fill="none" stroke="#2E2E2C" stroke-width="40" stroke-linecap="round"/>
+<path d="M40 247 C 72 247, 60 244, 96 244 C 148 244, 148 226, 200 226 C 252 226, 252 214, 304 214 C 356 214, 356 214, 408 214 C 460 214, 460 226, 512 226 C 564 226, 568 244, 616 244" fill="none" stroke="#F4F4F1" stroke-width="2.2" stroke-linecap="butt" stroke-dasharray="14 18"/>
+<rect x="342" y="120" width="120" height="20" rx="6" fill="#FFFFFF" stroke="#CECBF6" stroke-width="0.75"/>
+<text class="ts" x="402" y="130" text-anchor="middle" dominant-baseline="central" style="fill:#534AB7">Material change</text>
+<text class="ts" x="402" y="150" text-anchor="middle" dominant-baseline="central" style="fill:#7F77DD">returns to Discovery</text>
+<g><line x1="148" y1="221" x2="148" y2="200" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round"/><rect x="143.5" y="183" width="9" height="18" rx="2.5" fill="#2E2E2C"/><circle cx="148" cy="187.5" r="1.8" fill="#D9534F"/><circle cx="148" cy="192" r="1.8" fill="#E0A33E"/><circle cx="148" cy="196.5" r="1.8" fill="#4CA777"/></g>
+<g><line x1="252" y1="207" x2="252" y2="186" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round"/><rect x="247.5" y="169" width="9" height="18" rx="2.5" fill="#2E2E2C"/><circle cx="252" cy="173.5" r="1.8" fill="#D9534F"/><circle cx="252" cy="178" r="1.8" fill="#E0A33E"/><circle cx="252" cy="182.5" r="1.8" fill="#4CA777"/></g>
+<g><line x1="460" y1="207" x2="460" y2="186" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round"/><rect x="455.5" y="169" width="9" height="18" rx="2.5" fill="#2E2E2C"/><circle cx="460" cy="173.5" r="1.8" fill="#D9534F"/><circle cx="460" cy="178" r="1.8" fill="#E0A33E"/><circle cx="460" cy="182.5" r="1.8" fill="#4CA777"/></g>
+<g><circle cx="96" cy="244" r="15" fill="#3C3489" stroke="#FFFFFF" stroke-width="2.4"/>
+<path d="M96 239 V244" stroke="#FFFFFF" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+<path d="M93.5 241.8 L96 244 L98.5 241.8" stroke="#FFFFFF" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M91 246.5 V249.5 H101 V246.5" stroke="#FFFFFF" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="109" cy="231" r="7.5" fill="#FFFFFF" stroke="#3C3489" stroke-width="1.2"/><text class="ts" x="109" y="231" text-anchor="middle" dominant-baseline="central" style="fill:#3C3489">1</text></g>
+<g><circle cx="200" cy="226" r="15" fill="#3C3489" stroke="#FFFFFF" stroke-width="2.4"/>
+<circle cx="198.8" cy="224.8" r="3.6" fill="none" stroke="#FFFFFF" stroke-width="1.5"/>
+<path d="M201.6 227.6 L205 231" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round"/>
+<circle cx="213" cy="213" r="7.5" fill="#FFFFFF" stroke="#3C3489" stroke-width="1.2"/><text class="ts" x="213" y="213" text-anchor="middle" dominant-baseline="central" style="fill:#3C3489">2</text></g>
+<g><circle cx="304" cy="214" r="15" fill="#3C3489" stroke="#FFFFFF" stroke-width="2.4"/>
+<path d="M301.6 209 V213 L298.8 218.5 Q298 220 300.4 220 H307.6 Q310 220 309.2 218.5 L306.4 213 V209" fill="none" stroke="#FFFFFF" stroke-width="1.4" stroke-linejoin="round"/>
+<path d="M300.4 209 H307.6" stroke="#FFFFFF" stroke-width="1.4" stroke-linecap="round"/>
+<circle cx="317" cy="201" r="7.5" fill="#FFFFFF" stroke="#3C3489" stroke-width="1.2"/><text class="ts" x="317" y="201" text-anchor="middle" dominant-baseline="central" style="fill:#3C3489">3</text></g>
+<g><circle cx="408" cy="214" r="15" fill="#3C3489" stroke="#FFFFFF" stroke-width="2.4"/>
+<path d="M404 208 V221" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round"/>
+<path d="M404 208 H414 V214 H404" fill="none" stroke="#FFFFFF" stroke-width="1.3" stroke-linejoin="round"/>
+<path d="M404 208 H409 V211 H404 Z M409 211 H414 V214 H409 Z" fill="#FFFFFF"/>
+<circle cx="421" cy="201" r="7.5" fill="#FFFFFF" stroke="#3C3489" stroke-width="1.2"/><text class="ts" x="421" y="201" text-anchor="middle" dominant-baseline="central" style="fill:#3C3489">4</text></g>
+<g><circle cx="512" cy="226" r="15" fill="#3C3489" stroke="#FFFFFF" stroke-width="2.4"/>
+<path d="M505 226 H509.5 L511.3 221 L514 231 L515.8 226 H519" fill="none" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="525" cy="213" r="7.5" fill="#FFFFFF" stroke="#3C3489" stroke-width="1.2"/><text class="ts" x="525" y="213" text-anchor="middle" dominant-baseline="central" style="fill:#3C3489">5</text></g>
+<g><circle cx="616" cy="244" r="15" fill="#5F5E5A" stroke="#FFFFFF" stroke-width="2.4"/>
+<path d="M616 238 V244" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round"/>
+<path d="M611.4 241 A 6 6 0 1 0 620.6 241" fill="none" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round"/>
+<circle cx="629" cy="231" r="7.5" fill="#FFFFFF" stroke="#5F5E5A" stroke-width="1.2"/><text class="ts" x="629" y="231" text-anchor="middle" dominant-baseline="central" style="fill:#5F5E5A">6</text></g>
+<text class="th" x="96" y="286" text-anchor="middle" dominant-baseline="central" style="fill:#26215C">Intake</text>
+<text class="ts" x="96" y="302" text-anchor="middle" dominant-baseline="central" style="fill:#6E6C86">Front door</text>
+<text class="th" x="200" y="268" text-anchor="middle" dominant-baseline="central" style="fill:#26215C">Feasibility</text>
+<text class="ts" x="200" y="284" text-anchor="middle" dominant-baseline="central" style="fill:#6E6C86">Go / no-go</text>
+<text class="th" x="304" y="256" text-anchor="middle" dominant-baseline="central" style="fill:#26215C">Discovery</text>
+<text class="ts" x="304" y="272" text-anchor="middle" dominant-baseline="central" style="fill:#6E6C86">POC &amp; pilot</text>
+<text class="th" x="408" y="256" text-anchor="middle" dominant-baseline="central" style="fill:#26215C">Productionise</text>
+<text class="ts" x="408" y="272" text-anchor="middle" dominant-baseline="central" style="fill:#6E6C86">Build &amp; deploy</text>
+<text class="th" x="512" y="268" text-anchor="middle" dominant-baseline="central" style="fill:#26215C">Monitor</text>
+<text class="ts" x="512" y="284" text-anchor="middle" dominant-baseline="central" style="fill:#6E6C86">Steady state</text>
+<text class="th" x="616" y="286" text-anchor="middle" dominant-baseline="central" style="fill:#26215C">Retirement</text>
+<text class="ts" x="616" y="302" text-anchor="middle" dominant-baseline="central" style="fill:#6E6C86">Decommission</text>
+<line x1="40" y1="330" x2="640" y2="330" stroke="#DAD9D5" stroke-width="1"/>
+<g><line x1="118" y1="352" x2="118" y2="343" stroke="#9A9A95" stroke-width="2" stroke-linecap="round"/><rect x="114" y="341" width="8" height="13" rx="2" fill="#2E2E2C"/><circle cx="118" cy="344.5" r="1.5" fill="#D9534F"/><circle cx="118" cy="347.5" r="1.5" fill="#E0A33E"/><circle cx="118" cy="350.5" r="1.5" fill="#4CA777"/></g>
+<text class="ts" x="132" y="347" dominant-baseline="central" style="fill:#6E6C86">Traffic light = governance gate</text>
+<path d="M372 347 C 384 340, 404 340, 416 347" fill="none" stroke="#3A3A38" stroke-width="2.6" stroke-linecap="round"/>
+<text class="ts" x="428" y="347" dominant-baseline="central" style="fill:#6E6C86">Bypass = material change route</text>
+</svg></div>
+
+      <hr>
+
+      <h2>Intake</h2>
+      <p>Intake is the front door. Candidate use cases are submitted through the AI Front Door portal and triaged by the DS community against published criteria — does the use case have a clear sponsor, a stated business problem, and a plausible hypothesis that data can help. Use cases that do not meet the criteria are declined with a reason recorded; those that do are accepted, with a working accountable from DS assigned to carry them forward.</p><p>The detailed criteria for the AI Front Door — submission format, triage cadence, and grounds for rejection — live on the <a href='#'>Intake / AI Front Door</a> child page, which the DS community owns.</p>
+      <div class="phase-figure"><svg width="100%" viewBox="0 0 680 344" role="img" xmlns="http://www.w3.org/2000/svg">
+<title>Intake phase card</title>
+<path d="M40 66 L40 324 Q40 336 52 336 L628 336 Q640 336 640 324 L640 66" fill="none" stroke="#CECBF6" stroke-width="1"/>
+<path d="M40 32 Q40 20 52 20 L628 20 Q640 20 640 32 L640 66 L40 66 Z" fill="#3C3489"/>
+<circle cx="70" cy="43" r="14" fill="#26215C"/><text class="th" x="70" y="43" text-anchor="middle" dominant-baseline="central" style="fill:#EEEDFE">1</text>
+<text class="th" x="96" y="43" dominant-baseline="central" style="fill:#FFFFFF">Intake</text>
+<rect x="498" y="30" width="126" height="26" rx="13" fill="#26215C"/><text class="ts" x="561" y="44" text-anchor="middle" dominant-baseline="central" style="fill:#CECBF6">Accountable: DS</text>
+<text class="ts" x="60" y="90" dominant-baseline="central" style="fill:#7F77DD">OBJECTIVE</text>
+<text class="t" x="60" y="114" dominant-baseline="central">Capture candidate use cases and route those worth pursuing into Feasibility.</text>
+<line x1="60" y1="138" x2="620" y2="138" stroke="#EEEDFE" stroke-width="1"/>
+<text class="ts" x="60" y="160" dominant-baseline="central" style="fill:#7F77DD">KEY ACTIVITIES</text>
+<text class="ts" x="60" y="184" dominant-baseline="central">Submission through the AI Front Door · triage against published criteria ·</text>
+<text class="ts" x="60" y="200" dominant-baseline="central">reject with a reason, or accept and assign a working accountable from DS</text>
+<line x1="60" y1="224" x2="620" y2="224" stroke="#EEEDFE" stroke-width="1"/>
+<text class="ts" x="60" y="246" dominant-baseline="central" style="fill:#7F77DD">ARTEFACTS</text>
+<g><rect x="60" y="260" width="186" height="22" rx="11" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/><text class="ts" x="153" y="271" text-anchor="middle" dominant-baseline="central" style="fill:#3C3489">Use case submission record</text></g>
+<g><rect x="252" y="260" width="130" height="22" rx="11" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/><text class="ts" x="317" y="271" text-anchor="middle" dominant-baseline="central" style="fill:#3C3489">Triage outcome</text></g>
+<path d="M40 302 L640 302 L640 324 Q640 336 628 336 L52 336 Q40 336 40 324 Z" fill="#CECBF6"/>
+<text class="th" x="64" y="319" dominant-baseline="central" style="fill:#3C3489">EXIT GATE</text><text class="t" x="152" y="319" dominant-baseline="central" style="fill:#26215C">Is this use case clear and credible enough to invest Feasibility effort?</text>
+</svg></div>
+
+      <hr>
+
+      <h2>Feasibility</h2>
+      <p>Feasibility is a deliberately lightweight, cross-team viability check. Its purpose is to filter, not to design. The business outcome is restated in measurable terms, and the use case is tested for viability from several angles at once: whether the data can be sourced and pipelined (Data Solution and Data Engineering), whether it can be operated and supported once built (MLOps, with Platform on resources and environments), and whether it is permissible to address this problem with AI at all (AI Governance). DS coordinates the check and owns the recommendation, but the judgement is a shared one.</p><p>Anything that turns into substantial data work or modelling has crossed into Discovery and should be re-scoped accordingly. The phase closes with a go/no-go recommendation captured in a feasibility memo.</p>
+      <div class="phase-figure"><svg width="100%" viewBox="0 0 680 422" role="img" xmlns="http://www.w3.org/2000/svg">
+<title>Feasibility phase card</title>
+<path d="M40 66 L40 402 Q40 414 52 414 L628 414 Q640 414 640 402 L640 66" fill="none" stroke="#CECBF6" stroke-width="1"/>
+<path d="M40 32 Q40 20 52 20 L628 20 Q640 20 640 32 L640 66 L40 66 Z" fill="#3C3489"/>
+<circle cx="70" cy="43" r="14" fill="#26215C"/>
+<text class="th" x="70" y="43" text-anchor="middle" dominant-baseline="central" style="fill:#EEEDFE">2</text>
+<text class="th" x="96" y="43" dominant-baseline="central" style="fill:#FFFFFF">Feasibility</text>
+<rect x="498" y="30" width="126" height="26" rx="13" fill="#26215C"/>
+<text class="ts" x="561" y="44" text-anchor="middle" dominant-baseline="central" style="fill:#CECBF6">Accountable: DS</text>
+<text class="ts" x="60" y="90" dominant-baseline="central" style="fill:#7F77DD">OBJECTIVE</text>
+<text class="t" x="60" y="114" dominant-baseline="central">Decide, as a cross-team check, whether a use case is worth the deeper work of Discovery.</text>
+<line x1="60" y1="138" x2="620" y2="138" stroke="#EEEDFE" stroke-width="1"/>
+<text class="ts" x="60" y="160" dominant-baseline="central" style="fill:#7F77DD">KEY ACTIVITIES</text>
+<text class="ts" x="60" y="184" dominant-baseline="central">Restate the outcome in measurable terms · test data, platform and governance</text>
+<text class="ts" x="60" y="200" dominant-baseline="central">viability with the relevant teams · identify blockers · give a go / no-go recommendation</text>
+<line x1="60" y1="224" x2="620" y2="224" stroke="#EEEDFE" stroke-width="1"/>
+<text class="ts" x="60" y="246" dominant-baseline="central" style="fill:#7F77DD">CONTRIBUTORS</text>
+<g><rect x="60" y="260" width="124" height="22" rx="11" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/><text class="ts" x="122" y="271" text-anchor="middle" dominant-baseline="central" style="fill:#3C3489">Data Solution</text></g>
+<g><rect x="190" y="260" width="134" height="22" rx="11" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/><text class="ts" x="257" y="271" text-anchor="middle" dominant-baseline="central" style="fill:#3C3489">Data Engineering</text></g>
+<g><rect x="330" y="260" width="74" height="22" rx="11" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/><text class="ts" x="367" y="271" text-anchor="middle" dominant-baseline="central" style="fill:#3C3489">MLOps</text></g>
+<g><rect x="410" y="260" width="124" height="22" rx="11" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/><text class="ts" x="472" y="271" text-anchor="middle" dominant-baseline="central" style="fill:#3C3489">AI Governance</text></g>
+<line x1="60" y1="302" x2="620" y2="302" stroke="#EEEDFE" stroke-width="1"/>
+<text class="ts" x="60" y="324" dominant-baseline="central" style="fill:#7F77DD">ARTEFACT</text>
+<g><rect x="60" y="338" width="130" height="22" rx="11" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/><text class="ts" x="125" y="349" text-anchor="middle" dominant-baseline="central" style="fill:#3C3489">Feasibility memo</text></g>
+<path d="M40 380 L640 380 L640 402 Q640 414 628 414 L52 414 Q40 414 40 402 Z" fill="#CECBF6"/>
+<text class="th" x="64" y="397" dominant-baseline="central" style="fill:#3C3489">EXIT GATE</text>
+<text class="t" x="152" y="397" dominant-baseline="central" style="fill:#26215C">Is this feasible and worth investigating further in Discovery?</text>
+</svg></div>
+
+      <hr>
+
+      <h2>Discovery</h2>
+      <p>Discovery determines, with evidence, whether the use case should be productionised. The team explores the data, frames the problem and selects a method — including the honest question of whether AI/ML is the right tool or whether something simpler meets the outcome — builds a proof of concept, and pilots it in the Discovery environment, a production-equivalent environment that allows realistic testing without affecting live systems.</p><p>The pilot sits at the <em>end</em> of Discovery rather than the start of Productionise. This is deliberate: the pilot exists to answer “should we productionise this?”, not to ship to users. The phase produces a pilot evaluation report and a draft model card alongside the POC.</p>
+      <div class="phase-figure"><svg width="100%" viewBox="0 0 680 344" role="img" xmlns="http://www.w3.org/2000/svg">
+<title>Discovery phase card</title>
+<path d="M40 66 L40 324 Q40 336 52 336 L628 336 Q640 336 640 324 L640 66" fill="none" stroke="#CECBF6" stroke-width="1"/>
+<path d="M40 32 Q40 20 52 20 L628 20 Q640 20 640 32 L640 66 L40 66 Z" fill="#3C3489"/>
+<circle cx="70" cy="43" r="14" fill="#26215C"/><text class="th" x="70" y="43" text-anchor="middle" dominant-baseline="central" style="fill:#EEEDFE">3</text>
+<text class="th" x="96" y="43" dominant-baseline="central" style="fill:#FFFFFF">Discovery</text>
+<rect x="498" y="30" width="126" height="26" rx="13" fill="#26215C"/><text class="ts" x="561" y="44" text-anchor="middle" dominant-baseline="central" style="fill:#CECBF6">Accountable: DS</text>
+<text class="ts" x="60" y="90" dominant-baseline="central" style="fill:#7F77DD">OBJECTIVE</text>
+<text class="t" x="60" y="114" dominant-baseline="central">Determine, with evidence, whether the use case should be productionised.</text>
+<line x1="60" y1="138" x2="620" y2="138" stroke="#EEEDFE" stroke-width="1"/>
+<text class="ts" x="60" y="160" dominant-baseline="central" style="fill:#7F77DD">KEY ACTIVITIES</text>
+<text class="ts" x="60" y="184" dominant-baseline="central">Data exploration and quality assessment · problem framing and method</text>
+<text class="ts" x="60" y="200" dominant-baseline="central">selection · proof of concept · pilot in the Discovery environment</text>
+<line x1="60" y1="224" x2="620" y2="224" stroke="#EEEDFE" stroke-width="1"/>
+<text class="ts" x="60" y="246" dominant-baseline="central" style="fill:#7F77DD">ARTEFACTS</text>
+<g><rect x="60" y="260" width="94" height="22" rx="11" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/><text class="ts" x="107" y="271" text-anchor="middle" dominant-baseline="central" style="fill:#3C3489">POC repo</text></g>
+<g><rect x="160" y="260" width="170" height="22" rx="11" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/><text class="ts" x="245" y="271" text-anchor="middle" dominant-baseline="central" style="fill:#3C3489">Pilot evaluation report</text></g>
+<g><rect x="336" y="260" width="142" height="22" rx="11" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/><text class="ts" x="407" y="271" text-anchor="middle" dominant-baseline="central" style="fill:#3C3489">Draft model card</text></g>
+<path d="M40 302 L640 302 L640 324 Q640 336 628 336 L52 336 Q40 336 40 324 Z" fill="#CECBF6"/>
+<text class="th" x="64" y="319" dominant-baseline="central" style="fill:#3C3489">EXIT GATE</text><text class="t" x="152" y="319" dominant-baseline="central" style="fill:#26215C">Does the pilot evidence justify productionising this solution?</text>
+</svg></div>
+
+      <hr>
+
+      <h2>Productionise</h2>
+      <p>Productionise is the longest and most engineering-heavy phase. The solution is built to production quality, validated against the success criteria agreed in Discovery, deployed, and scaled to its intended users, with monitoring, alerting, and on-call coverage established. It is also the phase most prone to going wrong if treated as a continuation of Discovery — Discovery code rarely survives Productionise unchanged.</p><p>The handover from DS to MLOps sits <em>inside</em> this phase as an internal gate, not a separate phase. Accountability transfers from DS to MLOps once the handover criteria are met, between deployment-at-scale and the move to Monitor — a deliberate, evidenced transition rather than a silent transfer.</p>
+      <div class="phase-figure"><svg width="100%" viewBox="0 0 680 440" role="img" xmlns="http://www.w3.org/2000/svg">
+<title>Productionise phase card</title>
+<path d="M40 66 L40 420 Q40 432 52 432 L628 432 Q640 432 640 420 L640 66" fill="none" stroke="#CECBF6" stroke-width="1"/>
+<path d="M40 32 Q40 20 52 20 L628 20 Q640 20 640 32 L640 66 L40 66 Z" fill="#3C3489"/>
+<circle cx="70" cy="43" r="14" fill="#26215C"/><text class="th" x="70" y="43" text-anchor="middle" dominant-baseline="central" style="fill:#EEEDFE">4</text>
+<text class="th" x="96" y="43" dominant-baseline="central" style="fill:#FFFFFF">Productionise</text>
+<rect x="468" y="30" width="156" height="26" rx="13" fill="#26215C"/><text class="ts" x="546" y="44" text-anchor="middle" dominant-baseline="central" style="fill:#CECBF6">Accountable: DS → MLOps</text>
+<text class="ts" x="60" y="90" dominant-baseline="central" style="fill:#7F77DD">OBJECTIVE</text>
+<text class="t" x="60" y="114" dominant-baseline="central">Build, validate, deploy and scale; transfer operation of the solution to MLOps.</text>
+<line x1="60" y1="138" x2="620" y2="138" stroke="#EEEDFE" stroke-width="1"/>
+<text class="ts" x="60" y="160" dominant-baseline="central" style="fill:#7F77DD">KEY ACTIVITIES</text>
+<text class="ts" x="60" y="184" dominant-baseline="central">Production engineering · validation against Discovery success criteria ·</text>
+<text class="ts" x="60" y="200" dominant-baseline="central">deployment and scale-up · monitoring and on-call setup · DS → MLOps handover</text>
+<line x1="60" y1="224" x2="620" y2="224" stroke="#EEEDFE" stroke-width="1"/>
+<text class="ts" x="60" y="246" dominant-baseline="central" style="fill:#7F77DD">HANDOVER GATE</text>
+<rect x="60" y="260" width="560" height="40" rx="8" fill="#FAEEDA" stroke="#BA7517" stroke-width="0.75"/>
+<text class="ts" x="76" y="274" dominant-baseline="central" style="fill:#854F0B">HANDOVER GATE · inside this phase</text>
+<text class="ts" x="76" y="290" dominant-baseline="central" style="fill:#633806">Accountability transfers from DS to MLOps once the handover criteria are met.</text>
+<line x1="60" y1="320" x2="620" y2="320" stroke="#EEEDFE" stroke-width="1"/>
+<text class="ts" x="60" y="342" dominant-baseline="central" style="fill:#7F77DD">ARTEFACTS</text>
+<g><rect x="60" y="356" width="118" height="22" rx="11" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/><text class="ts" x="119" y="367" text-anchor="middle" dominant-baseline="central" style="fill:#3C3489">Production repo</text></g>
+<g><rect x="184" y="356" width="118" height="22" rx="11" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/><text class="ts" x="243" y="367" text-anchor="middle" dominant-baseline="central" style="fill:#3C3489">Deploy runbook</text></g>
+<g><rect x="308" y="356" width="104" height="22" rx="11" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/><text class="ts" x="360" y="367" text-anchor="middle" dominant-baseline="central" style="fill:#3C3489">Model card</text></g>
+<g><rect x="418" y="356" width="150" height="22" rx="11" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/><text class="ts" x="493" y="367" text-anchor="middle" dominant-baseline="central" style="fill:#3C3489">Handover checklist</text></g>
+<path d="M40 398 L640 398 L640 420 Q640 432 628 432 L52 432 Q40 432 40 420 Z" fill="#CECBF6"/>
+<text class="th" x="64" y="415" dominant-baseline="central" style="fill:#3C3489">EXIT GATE</text><text class="t" x="152" y="415" dominant-baseline="central" style="fill:#26215C">Is the solution live, performing as expected, and supportable by MLOps?</text>
+</svg></div>
+
+      <hr>
+
+      <h2>Monitor</h2>
+      <p>Monitor is steady-state operation, owned end-to-end by MLOps. It covers drift and performance monitoring against agreed metrics, incident response, and scheduled retraining on refreshed data where the architecture and features are unchanged. Every proposed change to the live solution is classified against the Material Change Rubric (below) before any work begins.</p><p>Changes that clear the rubric as in-flight stay in Monitor and are handled by MLOps. Changes flagged as material loop the solution back to Discovery, at which point DS re-engages and the solution re-enters the gates from there.</p>
+      <div class="phase-figure"><svg width="100%" viewBox="0 0 680 440" role="img" xmlns="http://www.w3.org/2000/svg">
+<title>Monitor phase card</title>
+<path d="M40 66 L40 420 Q40 432 52 432 L628 432 Q640 432 640 420 L640 66" fill="none" stroke="#CECBF6" stroke-width="1"/>
+<path d="M40 32 Q40 20 52 20 L628 20 Q640 20 640 32 L640 66 L40 66 Z" fill="#3C3489"/>
+<circle cx="70" cy="43" r="14" fill="#26215C"/><text class="th" x="70" y="43" text-anchor="middle" dominant-baseline="central" style="fill:#EEEDFE">5</text>
+<text class="th" x="96" y="43" dominant-baseline="central" style="fill:#FFFFFF">Monitor</text>
+<rect x="484" y="30" width="140" height="26" rx="13" fill="#26215C"/><text class="ts" x="554" y="44" text-anchor="middle" dominant-baseline="central" style="fill:#CECBF6">Accountable: MLOps</text>
+<text class="ts" x="60" y="90" dominant-baseline="central" style="fill:#7F77DD">OBJECTIVE</text>
+<text class="t" x="60" y="114" dominant-baseline="central">Keep the live solution performing, safe, and fit for purpose.</text>
+<line x1="60" y1="138" x2="620" y2="138" stroke="#EEEDFE" stroke-width="1"/>
+<text class="ts" x="60" y="160" dominant-baseline="central" style="fill:#7F77DD">KEY ACTIVITIES</text>
+<text class="ts" x="60" y="184" dominant-baseline="central">Drift and performance monitoring · incident response · scheduled retraining ·</text>
+<text class="ts" x="60" y="200" dominant-baseline="central">classify every proposed change against the Material Change Rubric (below)</text>
+<line x1="60" y1="224" x2="620" y2="224" stroke="#EEEDFE" stroke-width="1"/>
+<text class="ts" x="60" y="246" dominant-baseline="central" style="fill:#7F77DD">CHANGE CLASSIFICATION</text>
+<rect x="60" y="260" width="270" height="40" rx="8" fill="#E2F4EE" stroke="#1D9E75" stroke-width="0.75"/>
+<text class="ts" x="76" y="274" dominant-baseline="central" style="fill:#0F6E56">IN-FLIGHT CHANGE</text>
+<text class="ts" x="76" y="290" dominant-baseline="central" style="fill:#13533F">Stays in Monitor, handled by MLOps.</text>
+<rect x="350" y="260" width="270" height="40" rx="8" fill="#FBE9E4" stroke="#D85A30" stroke-width="0.75"/>
+<text class="ts" x="366" y="274" dominant-baseline="central" style="fill:#993C1D">MATERIAL CHANGE</text>
+<text class="ts" x="366" y="290" dominant-baseline="central" style="fill:#7A2F16">Loops the solution back to Discovery.</text>
+<line x1="60" y1="320" x2="620" y2="320" stroke="#EEEDFE" stroke-width="1"/>
+<text class="ts" x="60" y="342" dominant-baseline="central" style="fill:#7F77DD">ARTEFACTS</text>
+<g><rect x="60" y="356" width="110" height="22" rx="11" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/><text class="ts" x="115" y="367" text-anchor="middle" dominant-baseline="central" style="fill:#3C3489">Dashboard</text></g>
+<g><rect x="176" y="356" width="104" height="22" rx="11" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/><text class="ts" x="228" y="367" text-anchor="middle" dominant-baseline="central" style="fill:#3C3489">Incident log</text></g>
+<g><rect x="286" y="356" width="190" height="22" rx="11" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/><text class="ts" x="381" y="367" text-anchor="middle" dominant-baseline="central" style="fill:#3C3489">Change Classification Records</text></g>
+<g><rect x="482" y="356" width="120" height="22" rx="11" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/><text class="ts" x="542" y="367" text-anchor="middle" dominant-baseline="central" style="fill:#3C3489">Retraining logs</text></g>
+<path d="M40 398 L640 398 L640 420 Q640 432 628 432 L52 432 Q40 432 40 420 Z" fill="#CECBF6"/>
+<text class="th" x="64" y="415" dominant-baseline="central" style="fill:#3C3489">EXIT GATE</text><text class="t" x="152" y="415" dominant-baseline="central" style="fill:#26215C">Does this solution still earn its place in production?</text>
+</svg></div>
+
+      <hr>
+
+      <h2>Retirement</h2>
+      <p>Retirement decommissions a solution cleanly, preserves the institutional memory of what it did and why, and frees up the capacity it consumed. A solution enters Retirement when any trigger holds: the outcome is no longer relevant, a replacement is going live, performance has degraded beyond recovery, a regulatory change makes it non-viable, or the cost-to-value balance has tipped and cannot be recovered.</p><p>The work itself — notifying consumers, switching off serving, decommissioning infrastructure, archiving artefacts and decisions, and capturing lessons learned — is recorded in a retirement record. Retirement is the only phase whose exit has no next phase; its completion closes the lifecycle for that solution.</p>
+      <div class="phase-figure"><svg width="100%" viewBox="0 0 680 430" role="img" xmlns="http://www.w3.org/2000/svg">
+<title>Retirement phase card</title>
+<path d="M40 66 L40 410 Q40 422 52 422 L628 422 Q640 422 640 410 L640 66" fill="none" stroke="#D3D1C7" stroke-width="1"/>
+<path d="M40 32 Q40 20 52 20 L628 20 Q640 20 640 32 L640 66 L40 66 Z" fill="#5F5E5A"/>
+<circle cx="70" cy="43" r="14" fill="#3F3E3B"/><text class="th" x="70" y="43" text-anchor="middle" dominant-baseline="central" style="fill:#F1EFE8">6</text>
+<text class="th" x="96" y="43" dominant-baseline="central" style="fill:#FFFFFF">Retirement</text>
+<rect x="484" y="30" width="140" height="26" rx="13" fill="#3F3E3B"/><text class="ts" x="554" y="44" text-anchor="middle" dominant-baseline="central" style="fill:#CECBF6">Accountable: MLOps</text>
+<text class="ts" x="60" y="90" dominant-baseline="central" style="fill:#888780">OBJECTIVE</text>
+<text class="t" x="60" y="114" dominant-baseline="central">Decommission cleanly, preserve the institutional memory, and free up capacity.</text>
+<line x1="60" y1="138" x2="620" y2="138" stroke="#EDECE6" stroke-width="1"/>
+<text class="ts" x="60" y="160" dominant-baseline="central" style="fill:#888780">TRIGGERS · any one</text>
+<text class="ts" x="60" y="184" dominant-baseline="central">Outcome no longer relevant · replacement going live · unrecoverable</text>
+<text class="ts" x="60" y="200" dominant-baseline="central">underperformance · regulatory change · cost-to-value tipped and not recoverable</text>
+<line x1="60" y1="224" x2="620" y2="224" stroke="#EDECE6" stroke-width="1"/>
+<text class="ts" x="60" y="246" dominant-baseline="central" style="fill:#888780">KEY ACTIVITIES</text>
+<text class="ts" x="60" y="270" dominant-baseline="central">Notify consumers · switch off serving · decommission infra · archive</text>
+<text class="ts" x="60" y="286" dominant-baseline="central">artefacts and decisions · capture lessons learned</text>
+<line x1="60" y1="310" x2="620" y2="310" stroke="#EDECE6" stroke-width="1"/>
+<text class="ts" x="60" y="332" dominant-baseline="central" style="fill:#888780">ARTEFACT</text>
+<g><rect x="60" y="346" width="160" height="22" rx="11" fill="#EDECE6" stroke="#888780" stroke-width="0.5"/><text class="ts" x="140" y="357" text-anchor="middle" dominant-baseline="central" style="fill:#54534F">Retirement record</text></g>
+<path d="M40 388 L640 388 L640 410 Q640 422 628 422 L52 422 Q40 422 40 410 Z" fill="#D3D1C7"/>
+<text class="th" x="64" y="405" dominant-baseline="central" style="fill:#3F3E3B">EXIT GATE</text><text class="t" x="152" y="405" dominant-baseline="central" style="fill:#2E2D2B">Has the solution been decommissioned cleanly and its lessons captured?</text>
+</svg></div>
+      <div class="panel panel-aspiration"><strong>Aspiration.</strong> Retirement is described here as target-state. As a new function, we have not yet retired a live AI/ML solution; the detail will firm up the first time it is exercised.</div>
+
+      <hr>
+
+      <h2>The Material Change Rubric</h2>
+      <p>Every proposed change to a live solution is classified against the Material Change Rubric before any work begins. The rubric makes a single judgement explicit: should this change be handled inside Monitor, or does it loop the solution back to Discovery? The change is tested against four questions; if the answer to any one is yes, the change is material and the solution returns to Discovery (or to Feasibility, if the underlying use case itself is changing). If all four are no, the change is in-flight and stays in Monitor.</p>
+
+      <div class="phase-figure"><svg width="100%" viewBox="0 0 680 450" role="img" xmlns="http://www.w3.org/2000/svg">
+<title>Material Change Rubric decision tree</title>
+<defs>
+<marker id="aR" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#D85A30" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></marker>
+<marker id="aG" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#1D9E75" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></marker>
+<marker id="aP" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#534AB7" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></marker>
+</defs>
+<rect x="260" y="16" width="160" height="38" rx="8" fill="#3C3489"/>
+<text class="th" x="340" y="30" text-anchor="middle" dominant-baseline="central" style="fill:#FFFFFF">Proposed change</text>
+<text class="ts" x="340" y="45" text-anchor="middle" dominant-baseline="central" style="fill:#CECBF6">to a live solution</text>
+<line x1="340" y1="54" x2="340" y2="74" stroke="#534AB7" stroke-width="1.6" marker-end="url(#aP)"/>
+<rect x="170" y="80" width="340" height="32" rx="6" fill="#FFFFFF" stroke="#534AB7" stroke-width="1"/>
+<text class="ts" x="188" y="96" dominant-baseline="central" style="fill:#534AB7" font-weight="bold">1</text>
+<text class="ts" x="206" y="96" dominant-baseline="central" style="fill:#26215C">Change what the model does?</text>
+<rect x="170" y="120" width="340" height="32" rx="6" fill="#FFFFFF" stroke="#534AB7" stroke-width="1"/>
+<text class="ts" x="188" y="136" dominant-baseline="central" style="fill:#534AB7" font-weight="bold">2</text>
+<text class="ts" x="206" y="136" dominant-baseline="central" style="fill:#26215C">Change what the model needs?</text>
+<rect x="170" y="160" width="340" height="32" rx="6" fill="#FFFFFF" stroke="#534AB7" stroke-width="1"/>
+<text class="ts" x="188" y="176" dominant-baseline="central" style="fill:#534AB7" font-weight="bold">3</text>
+<text class="ts" x="206" y="176" dominant-baseline="central" style="fill:#26215C">Change who it affects?</text>
+<rect x="170" y="200" width="340" height="32" rx="6" fill="#FFFFFF" stroke="#534AB7" stroke-width="1"/>
+<text class="ts" x="188" y="216" dominant-baseline="central" style="fill:#534AB7" font-weight="bold">4</text>
+<text class="ts" x="206" y="216" dominant-baseline="central" style="fill:#26215C">Change its risk tier or regulatory scope?</text>
+<path d="M160 80 q-11 0 -11 13 v50 q0 13 -11 13 q11 0 11 13 v50 q0 13 11 13" fill="none" stroke="#1D9E75" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M520 80 q11 0 11 13 v50 q0 13 11 13 q-11 0 -11 13 v50 q0 13 -11 13" fill="none" stroke="#D85A30" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M138 156 H110 C 92 156, 86 164, 86 200 L86 300" fill="none" stroke="#1D9E75" stroke-width="1.7" marker-end="url(#aG)"/>
+<rect x="42" y="178" width="74" height="22" rx="11" fill="#E2F4EE"/>
+<text class="ts" x="79" y="189" text-anchor="middle" dominant-baseline="central" style="fill:#0F6E56">all NO</text>
+<path d="M542 156 H570 C 588 156, 594 164, 594 200 L594 300" fill="none" stroke="#D85A30" stroke-width="1.7" marker-end="url(#aR)"/>
+<rect x="564" y="178" width="74" height="22" rx="11" fill="#FBE9E4"/>
+<text class="ts" x="601" y="189" text-anchor="middle" dominant-baseline="central" style="fill:#993C1D">any YES</text>
+<rect x="20" y="312" width="280" height="56" rx="8" fill="#E2F4EE" stroke="#1D9E75" stroke-width="1"/>
+<text class="th" x="160" y="332" text-anchor="middle" dominant-baseline="central" style="fill:#0F6E56">In-flight change</text>
+<text class="ts" x="160" y="352" text-anchor="middle" dominant-baseline="central" style="fill:#13533F">Stays in Monitor, handled by MLOps</text>
+<rect x="380" y="312" width="280" height="56" rx="8" fill="#FBE9E4" stroke="#D85A30" stroke-width="1"/>
+<text class="th" x="520" y="332" text-anchor="middle" dominant-baseline="central" style="fill:#993C1D">Material change</text>
+<text class="ts" x="520" y="352" text-anchor="middle" dominant-baseline="central" style="fill:#7A2F16">Loops back to Discovery</text>
+<text class="ts" x="340" y="394" text-anchor="middle" dominant-baseline="central" style="fill:#6E6C86">Recorded on a Change Classification Record · when in doubt, treat as material</text>
+</svg></div>
+
+      <h2 style="font-size:16px;">Worked examples</h2>
+      <ul>
+        <li><em>Retraining the existing model on the latest three months of data, same features and architecture.</em> In-flight &mdash; nothing changes about what the model does, needs, who it affects, or its risk tier.</li>
+        <li><em>Swapping the underlying embedding model in a RAG solution.</em> Material &mdash; predictions for the same input will change.</li>
+        <li><em>Adding a new feature derived from existing data to improve accuracy.</em> Material &mdash; the model now needs something it did not before, and what it does has changed.</li>
+        <li><em>Extending an internal-only solution to a new business unit.</em> Material &mdash; who it affects has changed.</li>
+        <li><em>Tightening an alerting threshold on the monitoring dashboard.</em> In-flight &mdash; no change to the model itself.</li>
+      </ul>
+
+      <div class="panel panel-guidance"><strong>Guidance.</strong> When in doubt about a classification, treat the change as material. The cost of an unnecessary Discovery loop is lower than the cost of an undetected material change reaching production.</div>
+
+      <hr>
+      <h2>Related pages</h2>
+      <ul>
+        <li><a href="#">AI/ML Solution Lifecycle</a> &mdash; parent page.</li>
+        <li><a href="#">Intake / AI Front Door</a> &mdash; owned by the DS community.</li>
+        <li><a href="#">Roles, Accountabilities, and Governance Gates</a> &mdash; full RACI, gate membership, and the explicit criteria behind the gate questions on this page.</li>
+        <li><a href="#">Risk, Compliance, and Responsible AI</a>.</li>
+        <li><a href="#">Platform, Tooling, and Standards</a>.</li>
+        <li><a href="#">Metrics, Reporting, and Continuous Improvement</a>.</li>
+      </ul>
+      <div class="footer-meta">Review cadence: quarterly.</div>
+    </article>
+  </main>
+</div>
+</body>
+</html>
